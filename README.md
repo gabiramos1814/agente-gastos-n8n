@@ -143,6 +143,8 @@ Si Groq no estuviera disponible, el flujo falla y el Error Trigger avisa por mai
 | 5 | **Falla de ejecución no prevista** | Un workflow aparte con Error Trigger envía un mail con el nombre del workflow y el error. |
 | 6 | **Mensaje de otro remitente** | El primer IF lo ignora. |
 
+**Caso real durante las pruebas:** al registrar `Gasté $800 en la panadería con débito`, el agente no devolvió una categoría válida y el IF de validación frenó el guardado en lugar de grabar un dato incompleto. Se corrigió reforzando el prompt con la regla de elegir siempre una categoría de la lista (o "Otro") y nunca dejarla vacía.
+
 `INGRESO_MENSUAL`, `LIMITE_TARJETA` y `MINIMO_DISPONIBLE` son constantes del nodo Code de límites que cada usuario ajusta según su caso.
 
 ### Validaciones antes de escribir en la planilla
@@ -367,8 +369,8 @@ Las capturas del repositorio tienen tapados los datos personales (mail y nombre 
 
 - **WhatsApp simulado.** Se intentó la conexión real con WhatsApp Business mediante Meta for Developers: la plataforma devolvió un error al crear el número de prueba, y luego, con el número creado, los mensajes de prueba enviados desde el panel de Meta no llegaron a dos destinatarios distintos. Además, el nodo WhatsApp Trigger de n8n informó que solo permite un activador por aplicación de Facebook. Por eso el prototipo usa un Webhook que imita la estructura del mensaje, y el flujo se diseñó para reemplazar solo el nodo de entrada y el de respuesta.
 - **Permisos de Google.** En modo de prueba, el permiso de Google vence cada 7 días y hay que reconectar la credencial.
-- **Plan gratuito de Groq.** Tiene límites de solicitudes y de tokens; el flujo no está pensado para alto volumen sin cambios.
-- **Próximos pasos:** conectar WhatsApp real, definir los límites desde la planilla en lugar de dejarlos en el código y agregar consultas por categoría y por mes.
+- **Plan gratuito de Groq.** El plan gratuito limita cuántas consultas y cuánto texto (tokens) se pueden procesar por minuto y por día. Para este uso personal alcanza; con mucho más volumen habría que pasar a un plan pago o espaciar los mensajes.
+- **Próximos pasos:** conectar WhatsApp real, integrar el asistente a mi aplicación personal "La vida misma" para cargar los gastos desde ahí, definir los límites desde la planilla en lugar de dejarlos en el código y agregar consultas por categoría y por mes.
 
 ---
 
