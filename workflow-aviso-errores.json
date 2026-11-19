@@ -1,0 +1,66 @@
+{
+  "name": "Aviso de errores",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "de25f83a-081a-4dac-a0ad-54571f651d43",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "sendTo": "tu-mail@ejemplo.com",
+        "subject": "=Falló un workflow: {{ $json.workflow.name }}",
+        "message": "=El workflow {{ $json.workflow.name }} falló en el nodo {{ $json.execution.lastNodeExecuted }}. Error: {{ $json.execution.error.message }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f89d0f76-9634-41e9-86ec-66204b36e1df",
+      "name": "Send a message",
+      "webhookId": "49470f44-a3b7-4304-b460-6433de528f1b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ltMmSPHO9YKzDbMQ",
+          "name": "Gmail IA Automation"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "178b8774-cfe1-420c-963d-64fbeaeb6487",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c1b8338043aab3cd1195f96a14a531ba263baf78f0c14d7cdd6901d0744b3475"
+  },
+  "nodeGroups": [],
+  "id": "pP8GsJ5DWzJFAPTD",
+  "tags": []
+}
