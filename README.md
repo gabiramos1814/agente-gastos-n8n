@@ -9,6 +9,7 @@ Es un asistente que registra gastos personales a partir de mensajes en lenguaje 
 1. [Caso de negocio y ROI](#1-caso-de-negocio-y-roi)
 2. [Arquitectura](#2-arquitectura)
 3. [Por qué un AI Agent y no un nodo de IA simple](#3-por-qué-un-ai-agent-y-no-un-nodo-de-ia-simple)
+   - [3b. Por qué este proceso usa RAG](#3b-por-qué-este-proceso-usa-rag)
 4. [Modelo: nube vs. local](#4-modelo-nube-vs-local)
 5. [Manejo de errores y casos límite](#5-manejo-de-errores-y-casos-límite)
 6. [System prompt del agente](#6-system-prompt-del-agente)
