@@ -176,6 +176,7 @@ INFORMACIÓN DISPONIBLE
 - Categorías: Alimentación, Hogar, Transporte, Entretenimiento, Salud & Bienestar, Servicios, Compras & Shopping, Viajes, Mascotas, Otro.
 - Medios de pago: efectivo, débito, crédito (con el nombre de la tarjeta si se menciona), transferencia.
 - Tenés acceso al historial reciente de la conversación.
+- El sistema te pasa los datos del mes (gastos registrados, total del mes y total en crédito) para que respondas consultas.
 
 ACCIONES POSIBLES (elegí una por mensaje)
 - "registrar": el mensaje describe un gasto y ya tenés monto y medio de pago.
@@ -358,7 +359,7 @@ Cada captura indica el mensaje de entrada que la produjo.
 ```
 
 7. Ejecutá el workflow completo. Para empezar una conversación de cero, cambiá el sufijo de la *Key* de la memoria del agente.
-8. Para el aviso de errores, creá un workflow con **Error Trigger → Gmail**, publicalo y elegilo en *Settings → Error Workflow* del workflow principal.
+8. Para el aviso de errores, importá `workflow-aviso-errores.json` (Error Trigger → Gmail), reemplazá el mail de ejemplo por el tuyo, publicalo y elegilo en *Settings → Error Workflow* del workflow principal.
 
 Las capturas del repositorio tienen tapados los datos personales (mail y nombre de la cuenta).
 
@@ -369,9 +370,9 @@ Las capturas del repositorio tienen tapados los datos personales (mail y nombre 
 - **WhatsApp simulado.** Se intentó la conexión real con WhatsApp Business mediante Meta for Developers: la plataforma devolvió un error al crear el número de prueba, y luego, con el número creado, los mensajes de prueba enviados desde el panel de Meta no llegaron a dos destinatarios distintos. Además, el nodo WhatsApp Trigger de n8n informó que solo permite un activador por aplicación de Facebook. Por eso el prototipo usa un Webhook que imita la estructura del mensaje, y el flujo se diseñó para reemplazar solo el nodo de entrada y el de respuesta.
 - **Permisos de Google.** En modo de prueba, el permiso de Google vence cada 7 días y hay que reconectar la credencial.
 - **Plan gratuito de Groq.** El plan gratuito limita cuántas consultas y cuánto texto (tokens) se pueden procesar por minuto y por día. Para este uso personal alcanza; con mucho más volumen habría que pasar a un plan pago o espaciar los mensajes.
-- **Próximos pasos:** conectar WhatsApp real, integrar el asistente a mi aplicación personal "La vida misma" para cargar los gastos desde ahí, definir los límites desde la planilla en lugar de dejarlos en el código y agregar consultas por categoría y por mes.
 - **Webhook sin autenticación.** El filtro "Solo mi número" se basa en un dato del mensaje, que cualquiera que conozca la URL podría falsificar. Antes de conectar WhatsApp real habría que proteger el Webhook con un header de autenticación o validar la firma de Meta (X-Hub-Signature-256).
 - **Formato de importes.** El cálculo de totales asume importes numéricos en la planilla. Con formato local (por ejemplo 1.500,50) los totales y avisos de límite saldrían mal. Una mejora sería normalizar los separadores de miles y decimales antes de sumar.
+- **Próximos pasos:** conectar WhatsApp real, integrar el asistente a mi aplicación personal "La vida misma" para cargar los gastos desde ahí, definir los límites desde la planilla en lugar de dejarlos en el código y agregar consultas por categoría y por mes.
 
 ---
 
