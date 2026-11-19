@@ -9,7 +9,6 @@ Es un asistente que registra gastos personales a partir de mensajes en lenguaje 
 1. [Caso de negocio y ROI](#1-caso-de-negocio-y-roi)
 2. [Arquitectura](#2-arquitectura)
 3. [Por qué un AI Agent y no un nodo de IA simple](#3-por-qué-un-ai-agent-y-no-un-nodo-de-ia-simple)
-   - [3b. Por qué este proceso usa RAG](#3b-por-qué-este-proceso-usa-rag)
 4. [Modelo: nube vs. local](#4-modelo-nube-vs-local)
 5. [Manejo de errores y casos límite](#5-manejo-de-errores-y-casos-límite)
 6. [System prompt del agente](#6-system-prompt-del-agente)
@@ -177,7 +176,6 @@ INFORMACIÓN DISPONIBLE
 - Categorías: Alimentación, Hogar, Transporte, Entretenimiento, Salud & Bienestar, Servicios, Compras & Shopping, Viajes, Mascotas, Otro.
 - Medios de pago: efectivo, débito, crédito (con el nombre de la tarjeta si se menciona), transferencia.
 - Tenés acceso al historial reciente de la conversación.
-- El sistema te pasa los datos del mes (gastos registrados, total del mes y total en crédito) para que respondas consultas.
 
 ACCIONES POSIBLES (elegí una por mensaje)
 - "registrar": el mensaje describe un gasto y ya tenés monto y medio de pago.
@@ -372,6 +370,8 @@ Las capturas del repositorio tienen tapados los datos personales (mail y nombre 
 - **Permisos de Google.** En modo de prueba, el permiso de Google vence cada 7 días y hay que reconectar la credencial.
 - **Plan gratuito de Groq.** El plan gratuito limita cuántas consultas y cuánto texto (tokens) se pueden procesar por minuto y por día. Para este uso personal alcanza; con mucho más volumen habría que pasar a un plan pago o espaciar los mensajes.
 - **Próximos pasos:** conectar WhatsApp real, integrar el asistente a mi aplicación personal "La vida misma" para cargar los gastos desde ahí, definir los límites desde la planilla en lugar de dejarlos en el código y agregar consultas por categoría y por mes.
+- **Webhook sin autenticación.** El filtro "Solo mi número" se basa en un dato del mensaje, que cualquiera que conozca la URL podría falsificar. Antes de conectar WhatsApp real habría que proteger el Webhook con un header de autenticación o validar la firma de Meta (X-Hub-Signature-256).
+- **Formato de importes.** El cálculo de totales asume importes numéricos en la planilla. Con formato local (por ejemplo 1.500,50) los totales y avisos de límite saldrían mal. Una mejora sería normalizar los separadores de miles y decimales antes de sumar.
 
 ---
 
